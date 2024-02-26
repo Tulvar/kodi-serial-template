@@ -20,10 +20,13 @@ def rename_files(folder_path, series_name, season_number):
             episode_number = "???"  # Если номер серии не найден, ставим ??? вместо номера
         
         # Заменяем пробелы на точки в имени файла
-        new_file_name = file_name.replace(' ', '.')
+        new_file_name = series_name.replace(' ', '.')
+        
+        file_name_parts = os.path.splitext(file_name)
+        extension = file_name_parts[1]
         
         # Формируем новое имя файла с номером сезона и номером серии
-        new_file_name_with_season = f"{series_name} - S{season_number:02d}E{episode_number}.{new_file_name}"
+        new_file_name_with_season = f"{new_file_name}.S{season_number:02d}E{episode_number}{extension}"
         
         # Формируем полные пути к старому и новому файлам
         old_file_path = os.path.join(folder_path, file_name)
@@ -35,7 +38,7 @@ def rename_files(folder_path, series_name, season_number):
         print(f"Переименован файл: {file_name} -> {new_file_name_with_season}")
 
 # Пример использования функции
-folder_path = "/путь/к/папке/сериала"
-series_name = "Название.сериала"
+folder_path = "D:\\путь\\до\\папки"
+series_name = "название сериала"
 season_number = 1
 rename_files(folder_path, series_name, season_number)
